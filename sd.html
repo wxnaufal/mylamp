@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Password Protected ON/OFF Button</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  #mainContent {
+    display: none;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+  }
+  #status {
+    margin-top: 20px;
+    font-size: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="passwordPrompt">
+  <h2>Enter Password to Access</h2>
+  <input type="password" id="passwordInput" placeholder="Password" />
+  <button onclick="checkPassword()">Submit</button>
+  <p id="errorMsg" style="color:red;"></p>
+</div>
+
+<div id="mainContent">
+  <h1>Welcome!</h1>
+  <button id="toggleButton" onclick="toggle()">OFF</button>
+  <div id="status">Status: OFF</div>
+</div>
+
+<script>
+  const correctPassword = "1234";
+
+  function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    const errorMsg = document.getElementById('errorMsg');
+    if(input === correctPassword) {
+      document.getElementById('passwordPrompt').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      errorMsg.textContent = '';
+    } else {
+      errorMsg.textContent = 'Incorrect password, try again.';
+    }
+  }
+
+  let isOn = false;
+  function toggle() {
+    isOn = !isOn;
+    const btn = document.getElementById('toggleButton');
+    const status = document.getElementById('status');
+    if(isOn) {
+      btn.textContent = 'ON';
+      status.textContent = 'Status: ON';
+      btn.style.backgroundColor = 'green';
+      btn.style.color = 'white';
+    } else {
+      btn.textContent = 'OFF';
+      status.textContent = 'Status: OFF';
+      btn.style.backgroundColor = '';
+      btn.style.color = '';
+    }
+  }
+</script>
+
+</body>
+</html>
